@@ -1,15 +1,15 @@
 import React from 'react';
-import Header from '../component/layout/Header'
+import Header from '../component/layout/Header';
 import '../App.css';
 import Footer from "../component/layout/Footer";
-import News from "../component/News";
+import NewsContainer from "../container/NewsContainer";
 
 function App() {
   return (
     <div>
       <Header />
-      <News/>
-      <Footer/>
+      <NewsContainer />
+      <Footer />
     </div>
   );
 }

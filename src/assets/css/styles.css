@@ -57,13 +57,6 @@ a:focus {
     font-size: 14px;
     color: #828282; }
 
-ul,
-ol {
-    margin: 0; }
-ul li,
-ol li {
-    list-style: none; }
-
 img {
     height: auto;
     max-width: 100%; }
@@ -131,7 +124,9 @@ img {
     height: 500px !important; }
 
 .height-600 {
-    height: 600px !important; }
+    max-height: 720px !important;
+    overflow-y: scroll !important;
+}
 
 .height-700 {
     height: 700px !important; }
@@ -160,7 +155,7 @@ img {
 .section-heading {
     position: relative;
     z-index: 1;
-    margin-bottom: 90px;
+    margin-bottom: 25px;
     border-bottom: 1px solid #d0d5d8; }
 .section-heading h6 {
     font-size: 16px;
@@ -238,28 +233,6 @@ textarea:focus {
     outline: none;
     box-shadow: none;
     border-color: transparent; }
-
-/* ScrollUp */
-#scrollUp {
-    background-color: #ee002d;
-    border-radius: 0;
-    bottom: 60px;
-    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
-    color: #ffffff;
-    font-size: 24px;
-    height: 40px;
-    line-height: 38px;
-    right: 60px;
-    text-align: center;
-    width: 40px;
-    -webkit-transition-duration: 500ms;
-    transition-duration: 500ms; }
-#scrollUp:hover {
-    background-color: #000000; }
-@media only screen and (max-width: 767px) {
-    #scrollUp {
-        bottom: 30px;
-        right: 30px; } }
 
 /* Button */
 .newspaper-btn {

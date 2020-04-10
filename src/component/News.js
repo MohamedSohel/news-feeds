@@ -1,9 +1,34 @@
-import React from "react";
+import React, {useState} from "react";
+import {getNews} from "../redux/action/NewsAction";
+import NewsDescription from "./NewsDescription";
 
-const News = () => {
-  return(
+const News = ({dispatch, allNews, allFeeds}) => {
+  const [singleNews, setSingleNews] = useState({});
+  /**
+   * Call action to get all region groups to show in filter
+   * @type {Function}
+   */
+  const getAllNews = React.useCallback(async (feeds) => {
+    try {
+      const res = await getNews(dispatch, feeds);
+    } catch (e) {
+      console.log(e);
+    }
+  }, [dispatch]);
+  /**
+   * Call methods get all propeties and customers during page load.
+   */
+  React.useEffect(() => {
+    getAllNews(allFeeds);
+  }, [getAllNews, allFeeds]);
+  // initialize the singleNews description when all news loaded
+  React.useEffect(() => {
+    setSingleNews(allNews[0]);
+  }, [allNews]);
+  return (
     <div className="featured-post-area  section-padding-80-50">
       <div className="container">
+        {console.log(allFeeds)}
         <div className="row">
           <div className="col-12 col-md-4 col-lg-3">
             <div className="section-heading mb-u">
@@ -42,88 +67,25 @@ const News = () => {
             </div>
             <div className="row">
               <div className="col-12 col-lg-7">
-                <div className="single-blog-post featured-post">
-                  <div className="post-thumb">
-                    <a href="#"><img src="img/bg-img/16.jpg" alt="" /></a>
-                  </div>
-                  <div className="post-data">
-                    <a href="#" className="post-catagory">Finance</a>
-                    <a href="#" className="post-title">
-                      <h6>Financial news: A new company is born today at the stock market</h6>
-                    </a>
-                    <div className="post-meta">
-                      <p className="post-author">By <a href="#">Christinne Williams</a></p>
-                      <p className="post-excerp">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu metus
-                        sit amet odio sodales placerat. Sed varius leo ac leo fermentum, eu cursus nunc maximus. Integer
-                        convallis nisi nibh, et ornare neque ullamcorper ac. Nam id congue lectus, a venenatis massa.
-                        Maecenas justo libero, vulputate vel nunc id, blandit feugiat sem. </p>
-                      <div className="d-flex align-items-center">
-                        <a href="#" className="post-like"><span>392</span></a>
-                        <a href="#" className="post-comment">
-                          <span>10</span>
+                  <NewsDescription singleNews={singleNews} />
+              </div>
+              <div className="col-12 col-lg-5 height-600">
+                {allNews && allNews.map((news) => (
+                  <div className="single-blog-post small-featured-post d-flex">
+                    <div className="post-thumb">
+                      <a href="#"><img src={news.news_logo} alt="" /></a>
+                    </div>
+                    <div className="post-data">
+                      <a href="#" className="post-catagory">{news.category}</a>
+                      <div className="post-meta">
+                        <a href={news.news_link} className="post-title">
+                          <h6>{news.news_title}</h6>
                         </a>
+                        <p className="post-date"><span>7:00 AM</span> | <span>April 14</span></p>
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
-              <div className="col-12 col-lg-5">
-                <div className="single-blog-post small-featured-post d-flex">
-                  <div className="post-thumb">
-                    <a href="#"><img src="img/bg-img/19.jpg" alt="" /></a>
-                  </div>
-                  <div className="post-data">
-                    <a href="#" className="post-catagory">Finance</a>
-                    <div className="post-meta">
-                      <a href="#" className="post-title">
-                        <h6>Pellentesque mattis arcu massa, nec fringilla turpis eleifend id.</h6>
-                      </a>
-                      <p className="post-date"><span>7:00 AM</span> | <span>April 14</span></p>
-                    </div>
-                  </div>
-                </div>
-                <div className="single-blog-post small-featured-post d-flex">
-                  <div className="post-thumb">
-                    <a href="#"><img src="img/bg-img/20.jpg" alt="" /></a>
-                  </div>
-                  <div className="post-data">
-                    <a href="#" className="post-catagory">Politics</a>
-                    <div className="post-meta">
-                      <a href="#" className="post-title">
-                        <h6>Sed a elit euismod augue semper congue sit amet ac sapien.</h6>
-                      </a>
-                      <p className="post-date"><span>7:00 AM</span> | <span>April 14</span></p>
-                    </div>
-                  </div>
-                </div>
-                <div className="single-blog-post small-featured-post d-flex">
-                  <div className="post-thumb">
-                    <a href="#"><img src="img/bg-img/21.jpg" alt="" /></a>
-                  </div>
-                  <div className="post-data">
-                    <a href="#" className="post-catagory">Health</a>
-                    <div className="post-meta">
-                      <a href="#" className="post-title">
-                        <h6>Pellentesque mattis arcu massa, nec fringilla turpis eleifend id.</h6>
-                      </a>
-                      <p className="post-date"><span>7:00 AM</span> | <span>April 14</span></p>
-                    </div>
-                  </div>
-                </div>
-                <div className="single-blog-post small-featured-post d-flex">
-                  <div className="post-thumb">
-                    <a href="#"><img src="img/bg-img/22.jpg" alt="" /></a>
-                  </div>
-                  <div className="post-data">
-                    <a href="#" className="post-catagory">Finance</a>
-                    <div className="post-meta">
-                      <a href="#" className="post-title">
-                        <h6>Augue semper congue sit amet ac sapien. Fusce consequat.</h6>
-                      </a>
-                      <p className="post-date"><span>7:00 AM</span> | <span>April 14</span></p>
-                    </div>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
           </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './app/App';
+import AppContainer from './container/AppContainer';
 import * as serviceWorker from './serviceWorker';
 import './assets/css/styles.css';
 import Root from './ReduxRoot';
@@ -8,7 +8,7 @@ import Root from './ReduxRoot';
 ReactDOM.render(
   <React.StrictMode>
     <Root>
-      <App />
+      <AppContainer />
     </Root>
   </React.StrictMode>,
   document.getElementById('root'),
