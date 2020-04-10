@@ -142,7 +142,10 @@ img {
 .section-padding-80-0 {
     padding-top: 80px;
     padding-bottom: 0; }
-
+.section-padding-150-0 {
+    padding-top: 150px;
+    padding-bottom: 0;
+}
 .section-padding-0-80 {
     padding-top: 0;
     padding-bottom: 80px; }
@@ -1160,6 +1163,10 @@ textarea:focus {
     z-index: 1; }
 .mb-u {
     margin-bottom: unset;
+}
+.spinner-grow{
+    width: 10em !important;
+    height: 10em !important;
 }
 .contact-area .contact-title h2 {
     font-size: 40px;

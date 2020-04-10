@@ -18,7 +18,7 @@ const NewsFeed = () => {
  */
 const News = () => {
   const db = new Dexie('News');
-  db.version(1).stores({news: "++news_id,news_link,news_publish_date_time"});
+  db.version(1).stores({news: "++news_id,news_link,news_publish_date_time, category"});
   return db;
 };
 /**
@@ -48,9 +48,13 @@ const StoreAllNews = (allNews, category) => {
   });
 };
 
-const GetAllNewsData = async () => {
+const GetAllNewsData = async (category = [1, 2, 3]) => {
   const db = News();
-  const data = await db.news.toArray();
+  const data = await db.news.where('category')
+    .anyOf(category.length ? category : [1, 2, 3])
+    .reverse()
+    .limit(30)
+    .sortBy('news_publish_date_time');
   return data;
 };
 export {
